@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace DOMAIN.Entities;
+﻿namespace DOMAIN.Entities;
 
 public class Client
 {

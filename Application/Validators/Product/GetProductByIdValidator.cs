@@ -1,8 +1,8 @@
-﻿using APPLICATION.Features.Products.Queries;
-using DOMAIN.Interfaces;
+﻿using APPLICATION.Features.Products.Queries.GetProductById;
+using DOMAIN.Interfaces.Repositories;
 using FluentValidation;
 
-namespace APPLICATION.Validators.Product;
+namespace APPLICATION.Validators.T;
 
 public class GetProductByIdValidator : AbstractValidator<GetProductByIdQuery>
 {

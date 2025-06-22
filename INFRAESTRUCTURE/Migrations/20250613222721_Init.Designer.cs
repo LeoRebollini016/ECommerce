@@ -24,7 +24,7 @@ namespace INFRAESTRUCTURE.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DOMAIN.Entities.Product", b =>
+            modelBuilder.Entity("DOMAIN.Entities.T", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

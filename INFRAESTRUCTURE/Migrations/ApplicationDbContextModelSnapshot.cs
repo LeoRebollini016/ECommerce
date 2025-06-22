@@ -31,7 +31,6 @@ namespace INFRAESTRUCTURE.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cuit")
-                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
@@ -110,7 +109,7 @@ namespace INFRAESTRUCTURE.Migrations
                     b.ToTable("Orders", (string)null);
                 });
 
-            modelBuilder.Entity("DOMAIN.Entities.Product", b =>
+            modelBuilder.Entity("DOMAIN.Entities.T", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +145,7 @@ namespace INFRAESTRUCTURE.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DOMAIN.Entities.Product", "Product")
+                    b.HasOne("DOMAIN.Entities.T", "T")
                         .WithMany("DetailOrders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -154,7 +153,7 @@ namespace INFRAESTRUCTURE.Migrations
 
                     b.Navigation("Order");
 
-                    b.Navigation("Product");
+                    b.Navigation("T");
                 });
 
             modelBuilder.Entity("DOMAIN.Entities.Order", b =>
@@ -178,7 +177,7 @@ namespace INFRAESTRUCTURE.Migrations
                     b.Navigation("Details");
                 });
 
-            modelBuilder.Entity("DOMAIN.Entities.Product", b =>
+            modelBuilder.Entity("DOMAIN.Entities.T", b =>
                 {
                     b.Navigation("DetailOrders");
                 });

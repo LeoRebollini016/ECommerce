@@ -1,6 +1,5 @@
-using INFRAESTRUCTURE.Configuration;
-using API.Endpoints;
 using INFRAESTRUCTURE.Middleware;
+using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
@@ -27,6 +26,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.MapProductEndpoints();
+app.MapAllEndpoints();
 app.UseHttpsRedirection();
 app.Run();
