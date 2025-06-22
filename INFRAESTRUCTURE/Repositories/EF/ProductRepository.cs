@@ -1,5 +1,5 @@
 ﻿using DOMAIN.Entities;
-using DOMAIN.Interfaces;
+using DOMAIN.Interfaces.Repositories;
 using INFRAESTRUCTURE.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +14,6 @@ public class ProductRepository(ApplicationDbContext context) : IProductRepositor
     public async Task<bool> AnyNameAsync(string name)
     {
         return await context.Products.AnyAsync(x => x.Name == name);
-    }
-    public async Task Create(Product product)
-    {
-        await context.Products.AddAsync(product);
-        await context.SaveChangesAsync();
     }
 
     public async Task<Product?> FindByIdAsync(int id, CancellationToken ct)

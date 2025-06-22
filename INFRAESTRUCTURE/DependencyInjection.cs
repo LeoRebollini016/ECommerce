@@ -1,4 +1,4 @@
-﻿using DOMAIN.Interfaces;
+﻿using DOMAIN.Interfaces.Repositories;
 using INFRAESTRUCTURE.Context;
 using INFRAESTRUCTURE.Repositories.EF;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +15,7 @@ public static class DependencyInjection
             opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         services.AddScoped<ICommandGenerics, CommandGenerics>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IClientRepository, ClientRepository>();
         return services;
     }
 }

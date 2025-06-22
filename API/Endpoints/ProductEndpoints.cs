@@ -1,6 +1,9 @@
 ﻿using APPLICATION.Dtos.Products;
-using APPLICATION.Features.Products.Commands;
-using APPLICATION.Features.Products.Queries;
+using APPLICATION.Features.Products.Commands.Create;
+using APPLICATION.Features.Products.Commands.Delete;
+using APPLICATION.Features.Products.Commands.Update;
+using APPLICATION.Features.Products.Queries.GetProductById;
+using APPLICATION.Features.Products.Queries.GetProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,22 +33,22 @@ public static class ProductEndpoints
             return Results.Ok(results);
         });
         app.MapPost("CreateProduct", async (
-            [FromBody] ProductDto productDto,
+            [FromBody] CreateProductDto createProductDto,
             [FromServices] IMediator mediator,
             CancellationToken ct
             ) =>
         {
-            var request = new CreateProductCommand(productDto);
+            var request = new CreateProductCommand(createProductDto);
             var results = await mediator.Send(request, ct);
             return Results.Ok(results);
         });
         app.MapPut("UpdateProduct/{id}", async (
             [FromRoute] int id,
-            [FromBody] ProductDto productDto,
+            [FromBody] CreateProductDto createProductDto,
             [FromServices] IMediator mediator,
             CancellationToken ct) => 
         { 
-            var request = new UpdateProductCommand(id, productDto);
+            var request = new UpdateProductCommand(id, createProductDto);
             await mediator.Send(request, ct);
             return Results.NoContent();
         });

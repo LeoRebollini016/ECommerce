@@ -24,7 +24,6 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
             .HasMaxLength(100);
 
         builder.Property(p => p.Cuit)
-            .IsRequired()
             .HasMaxLength(15);
 
         builder.HasMany(p => p.Orders)

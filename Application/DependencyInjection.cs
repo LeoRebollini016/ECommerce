@@ -1,7 +1,8 @@
-﻿using APPLICATION.Common.Behaviors;
-using APPLICATION.Validators.Product;
+﻿using APPLICATION.Behaviors;
+using APPLICATION.Services.Client;
+using APPLICATION.Services.Product;
+using DOMAIN.Interfaces.Services;
 using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -15,11 +16,12 @@ public static class DependencyInjection
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg =>
         {
-            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            cfg.RegisterServicesFromAssembly(Assembly.Load("APPLICATION"));
+            cfg.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
         });
-        services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
-        services.AddValidatorsFromAssemblyContaining<UpdateProductValidator>();
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+        services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddTransient<IClientService, ClientService>();
+        services.AddTransient<IProductService, ProductService>();
         return services;
     }
 }

@@ -1,8 +1,8 @@
-﻿using APPLICATION.Features.Products.Commands;
-using DOMAIN.Interfaces;
+﻿using APPLICATION.Features.Products.Commands.Delete;
+using DOMAIN.Interfaces.Repositories;
 using FluentValidation;
 
-namespace APPLICATION.Validators.Product;
+namespace APPLICATION.Validators.T;
 
 public class DeleteProductValidator: AbstractValidator<DeleteProductCommand>
 {
@@ -15,7 +15,6 @@ public class DeleteProductValidator: AbstractValidator<DeleteProductCommand>
             {
                 var exists = await repository.ExistsAsync(id, CancellationToken);
                 return exists;
-            })
-            .WithMessage("El ID del producto no se ha encontrado.");
+            }).WithMessage("El ID del producto no se ha encontrado.");
     }
 }
