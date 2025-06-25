@@ -8,28 +8,19 @@ namespace INFRAESTRUCTURE.Repositories.EF;
 public class ProductRepository(ApplicationDbContext context) : IProductRepository
 {
     public async Task<IEnumerable<Product>> GetProducts(CancellationToken ct)
-    {
-        return await context.Products.ToListAsync(ct);
-    }
+        => await context.Products.ToListAsync(ct);
     public async Task<bool> AnyNameAsync(string name)
-    {
-        return await context.Products.AnyAsync(x => x.Name == name);
-    }
+        => await context.Products.AnyAsync(x => x.Name == name);
 
     public async Task<Product?> FindByIdAsync(int id, CancellationToken ct)
-    {
-        return await context.Products.FirstOrDefaultAsync(x => x.Id == id);
-    }
+        => await context.Products.FirstOrDefaultAsync(x => x.Id == id, ct);
 
     public async Task<bool> ExistsAsync(int id, CancellationToken ct)
-    {
-        return await context.Products.AnyAsync(x => x.Id == id, ct);
-    }
+        => await context.Products.AnyAsync(x => x.Id == id, ct);
 
     public async Task Delete(int id, CancellationToken ct)
     {
-        var entity = await context.Products.FirstOrDefaultAsync(x => x.Id == id);
+        var entity = await context.Products.FirstOrDefaultAsync(x => x.Id == id, ct);
         context.Remove(entity!);
-        await context.SaveChangesAsync();
     }
 }

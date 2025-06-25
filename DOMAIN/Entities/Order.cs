@@ -7,7 +7,6 @@ public class Order
     public required OrderStateEnum State { get; set; }
     public DateTime Date { get; set; }
     public required int ClientId { get; set; }
-
-    public virtual Client Client { get; set; }
+    public virtual required Client Client { get; set; }
     public virtual required ICollection<DetailOrder> Details { get; set; } = new List<DetailOrder>();
 }

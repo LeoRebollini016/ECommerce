@@ -8,5 +8,6 @@ public static class EndpointMapperExtensions
     {
         app.MapProductEndpoints();
         app.MapClientEndpoints();
+        app.MapOrderEndpoint();
     }
 }

@@ -11,9 +11,9 @@ public class DeleteProductValidator: AbstractValidator<DeleteProductCommand>
         RuleFor(x => x.id)
             .NotEmpty().WithMessage("El ID del producto es obligatorio.")
             .GreaterThanOrEqualTo(0).WithMessage("No existen productos con IDs negativos.")
-            .MustAsync(async (id, CancellationToken) =>
+            .MustAsync(async (id, ct) =>
             {
-                var exists = await repository.ExistsAsync(id, CancellationToken);
+                var exists = await repository.ExistsAsync(id, ct);
                 return exists;
             }).WithMessage("El ID del producto no se ha encontrado.");
     }
