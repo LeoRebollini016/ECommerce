@@ -11,8 +11,10 @@ public class ProductService(ICommandGenerics _command, IProductRepository _produ
         await _command.SaveChangeAsync(ct);
     }
     public async Task Delete(int id, CancellationToken ct)
-        => await _productRepository.Delete(id, ct);
-
+    {
+        await _productRepository.Delete(id, ct);
+        await _command.SaveChangeAsync(ct);
+    }
     public async Task<DOMAIN.Entities.Product?> FindByIdAsync(int id, CancellationToken ct)
      => await _productRepository.FindByIdAsync(id, ct);
 

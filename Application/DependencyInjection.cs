@@ -1,5 +1,6 @@
 ﻿using APPLICATION.Behaviors;
 using APPLICATION.Services.Client;
+using APPLICATION.Services.Order;
 using APPLICATION.Services.Product;
 using DOMAIN.Interfaces.Services;
 using FluentValidation;
@@ -22,6 +23,7 @@ public static class DependencyInjection
         services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
         services.AddTransient<IClientService, ClientService>();
         services.AddTransient<IProductService, ProductService>();
+        services.AddTransient<IOrderService, OrderService>();
         return services;
     }
 }
